@@ -4,6 +4,7 @@
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^15.1.0",
@@ -18,6 +19,6 @@
   "scripts": {
     "build": "babel src --out-dir build --source-maps=inline --delete-dir-on-start --copy-files --verbose",
     "deploy": "forever start --minUptime 2000 --spinSleepTime 5 build/index.js",
-    "start": "yarn build --watch & sleep 1 && nodemon --watch build build/index.js"
+    "start": "npm run build --watch & sleep 1 && nodemon -r esm --watch build build/index.js"
   }
 }
