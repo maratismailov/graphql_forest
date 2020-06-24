@@ -1,2 +1,2 @@
-export * from './environment';
+export * from './geometry';
 export * from './allplaces';
