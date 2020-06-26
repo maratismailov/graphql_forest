@@ -45,39 +45,39 @@ const forestries_list = new GraphQLObjectType({
     forestry_ru: { type: GraphQLString },
     forestry_num: { type: GraphQLString },
     forestrytype_id: { type: GraphQLString },
-    block_list: {
-      type: new GraphQLList(block_list),
-      resolve: gid => getBlockList(gid)
-    },
+    // block_list: {
+    //   type: new GraphQLList(block_list),
+    //   resolve: gid => getBlockList(gid)
+    // },
   })
 });
 
-const block_list = new GraphQLObjectType({
-  name: "block_list",
-  fields: () => ({
-    gid: { type: GraphQLString },
-    geom: { type: GraphQLString },
-    forestry_id: { type: GraphQLString },
-    block_num: { type: GraphQLString },
-    stand_list: {
-      type: new GraphQLList(stand_list),
-      resolve: gid => getStandList(gid)
-    },
-  })
-});
+// const block_list = new GraphQLObjectType({
+//   name: "block_list",
+//   fields: () => ({
+//     gid: { type: GraphQLString },
+//     geom: { type: GraphQLString },
+//     forestry_id: { type: GraphQLString },
+//     block_num: { type: GraphQLString },
+//     stand_list: {
+//       type: new GraphQLList(stand_list),
+//       resolve: gid => getStandList(gid)
+//     },
+//   })
+// });
 
-const stand_list = new GraphQLObjectType({
-  name: "stand_list",
-  fields: () => ({
-    gid: { type: GraphQLString },
-    geom: { type: GraphQLString },
-    leshoz_num: { type: GraphQLString },
-    block_num: { type: GraphQLString },
-    forestry_num: { type: GraphQLString },
-    stand_code: { type: GraphQLString },
-    stand_num: { type: GraphQLString },
-  })
-});
+// const stand_list = new GraphQLObjectType({
+//   name: "stand_list",
+//   fields: () => ({
+//     gid: { type: GraphQLString },
+//     geom: { type: GraphQLString },
+//     leshoz_num: { type: GraphQLString },
+//     block_num: { type: GraphQLString },
+//     forestry_num: { type: GraphQLString },
+//     stand_code: { type: GraphQLString },
+//     stand_num: { type: GraphQLString },
+//   })
+// });
 
 
 export const AllplacesType = new GraphQLObjectType({
@@ -146,39 +146,39 @@ const getForestriesList = (leshoz) => {
 }
 
 
-const getBlockList = (forestry) => {
-  return new Promise((resolve, reject) => {
-    pool.connect(function (err, client, done) {
-      if (err) {
-        return console.error('error fetching client from pool', err)
-      }
-      client.query('SELECT gid, block_num, forestry_id FROM forest.block WHERE forestry_id =' + forestry.gid, function (err, result) {
-        done()
-        if (err) {
-          return reject(console.error('error happened during query', err))
-        }
-        resolve(result.rows)
-      })
-    })
-  }
-  )
-}
+// const getBlockList = (forestry) => {
+//   return new Promise((resolve, reject) => {
+//     pool.connect(function (err, client, done) {
+//       if (err) {
+//         return console.error('error fetching client from pool', err)
+//       }
+//       client.query('SELECT gid, block_num, forestry_id FROM forest.block WHERE forestry_id =' + forestry.gid, function (err, result) {
+//         done()
+//         if (err) {
+//           return reject(console.error('error happened during query', err))
+//         }
+//         resolve(result.rows)
+//       })
+//     })
+//   }
+//   )
+// }
 
 
-const getStandList = (block) => {
-  return new Promise((resolve, reject) => {
-    pool.connect(function (err, client, done) {
-      if (err) {
-        return console.error('error fetching client from pool', err)
-      }
-      client.query('SELECT gid, leshoz_num, block_num, forestry_num, stand_num FROM forest.stand WHERE block_id =' + block.gid, function (err, result) {
-        done()
-        if (err) {
-          return reject(console.error('error happened during query', err))
-        }
-        resolve(result.rows)
-      })
-    })
-  }
-  )
-}
+// const getStandList = (block) => {
+//   return new Promise((resolve, reject) => {
+//     pool.connect(function (err, client, done) {
+//       if (err) {
+//         return console.error('error fetching client from pool', err)
+//       }
+//       client.query('SELECT gid, leshoz_num, block_num, forestry_num, stand_num FROM forest.stand WHERE block_id =' + block.gid, function (err, result) {
+//         done()
+//         if (err) {
+//           return reject(console.error('error happened during query', err))
+//         }
+//         resolve(result.rows)
+//       })
+//     })
+//   }
+//   )
+// }

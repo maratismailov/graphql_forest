@@ -1,11 +1,14 @@
-import { GraphQLSchema, GraphQLObjectType } from "graphql";
+import { GraphQLSchema, GraphQLObjectType, graphqlInt } from "graphql";
 import * as queries from "./queries";
 
 export default new GraphQLSchema({
   query: new GraphQLObjectType({
     name: "Query",
     fields: {
-      ...queries
+      ...queries,
+      args: {
+        id: {type: graphqlInt}
+      }
     }
   })
 });
