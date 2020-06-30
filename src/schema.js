@@ -6,9 +6,6 @@ export default new GraphQLSchema({
     name: "Query",
     fields: {
       ...queries,
-      args: {
-        id: {type: graphqlInt}
-      }
     }
   })
 });
